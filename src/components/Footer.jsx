@@ -35,7 +35,7 @@ const Footer = props => {
                 </div> */}
             </div>
 
-            <div className="colophon" style={{color: 'white'}}>Copyright 2014 Company name, Designed by Themezy. All rights reserved</div>
+            <div className="colophon" style={{color: 'white'}}>Copyright 2021 Cube Inifinity, <small>Designed by Themezy.</small></div>
         </div>
 
     </footer>

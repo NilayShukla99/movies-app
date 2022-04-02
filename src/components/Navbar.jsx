@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { Container, Navbar, Nav, NavDropdown } from 'react-bootstrap';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useMatch } from 'react-router-dom';
 import Searchbar from './Searchbar';
 import { useSelector, useDispatch } from 'react-redux';
 import { checkAuth } from '../redux/actions';
-import { useNavigate, Navigate } from 'react-router-dom';
+import { useNavigate, useLocation, useHref, useRoutes } from 'react-router-dom';
 import logo from '../images/logo.png';
 
 // + style={({ isActive }) => ({ color: isActive ? 'green' : 'blue' })}
@@ -16,6 +15,7 @@ const NavbarComponent = props => {
   auth = auth && auth.includes('true') ? true : false;
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const title = auth ? 'Logout' : 'Login';
   const handleAuth = () => {
     // isLoggedIn
@@ -138,10 +138,12 @@ const NavbarComponent = props => {
     }
   }
 
+
+
   return (
     <header className="site-header">
     <div className="container">
-      <Link to="/home" id="branding">
+      <Link to={auth ? `/home` : location.pathname } id="branding">
         <img src={logo} alt="cube movies" className="logo" />
         <div className="logo-copy">
           <h1 className="site-title">{props.companyName}</h1>
@@ -156,12 +158,14 @@ const NavbarComponent = props => {
               <li className="menu-item"><NavLink style={({ isActive }) => (activeStyle(isActive))} to="/home">Home</NavLink></li>
               <li className="menu-item"><NavLink style={({ isActive }) => (activeStyle(isActive))} to="/add-movie">Add Movie</NavLink></li>
               <li className="menu-item"><NavLink style={({ isActive }) => (activeStyle(isActive))} to="/about">About</NavLink></li>
-              <li className="menu-item"><Nav.Link onClick={handleAuth}>{title}</Nav.Link></li>
+              <li className="menu-item"><a onClick={handleAuth}>{title}</a></li>
             </ul>
 
             <div className="search-form">
             {/* <button onClick={showSearchbar}><i className="fa fa-search"></i></button> */}
-            <button onClick={() => navigateTo("/add-movie")}><i className="fa fa-plus"></i></button>
+            <button onClick={() => navigateTo("/add-movie")} style={{
+              width: '50px'
+            }}><i className="fa fa-plus"></i></button>
             </div>
           </div>
         }

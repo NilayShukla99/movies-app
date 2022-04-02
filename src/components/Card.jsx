@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMovies, deleteMovie } from '../redux/actions';
 // import { Button, Card, Container } from 'react-bootstrap';
-import { Button, Card, Container, Modal } from 'react-bootstrap';
+// import { Button, Card, Container, Modal } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
 
 // Component
-import { ModalComp, TagsComp } from './SubCompForCard';
+import { ModalComp, TagsComp } from './generic_comps/SubCompForCard';
 
 const CardComponent = (props) => {
     const { downloadLink, poster, name, rating, addDate, id, tags, firebaseID, desc_movie, editable } = props;
@@ -101,7 +101,28 @@ const CardComponent = (props) => {
             <div className="movie" data-fire_id={firebaseID} id={id}>
                 <figure className="movie-poster"><img src={poster} alt={name} /></figure>
                 <div className="movie-title" style={{display: 'flex', justifyContent: 'space-between'}}>
-                    <a href={downloadLink}>{name}</a>
+                    {/* <a href={downloadLink}>{name}</a> */}
+                    <Link
+                // style={{
+                //     color: '#000',
+                //     textDecoration: 'none',
+                //     display: 'block',
+                //     backgroundColor: '#ffaa3c',
+                //     padding: '7px',
+                //     borderRadius: '5px',
+                //     width: 'fit-content'
+                // }}
+                to={`/movie/${firebaseID}`} state={{
+                downloadLink,
+                poster,
+                name,
+                desc_movie,
+                rating,
+                addDate,
+                id,
+                tags,
+                firebaseID
+            }}>{name}</Link>
                     <span style={{
                         color: '#616368',
                         fontSize: '1rem'
@@ -110,7 +131,7 @@ const CardComponent = (props) => {
                     <TagsComp value={tags} />
                 {/* <p>{desc_movie}</p> */}
             
-            {editable && <Link
+            {/* {editable && <Link
                 style={{
                     color: '#000',
                     textDecoration: 'none',
@@ -131,8 +152,8 @@ const CardComponent = (props) => {
                 tags,
                 firebaseID
             }}>
-                {editable && downloadLink & name ? 'Modify' : 'Add this'}
-            </Link>}
+                {(editable && downloadLink) ? 'Modify' : 'Add this'}
+            </Link>} */}
             </div>
         </>
     )

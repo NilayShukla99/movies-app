@@ -1,6 +1,6 @@
 import types from '../actions/index';
 
-const { IS_AUTHENTICATED, ADD_MOVIE, UPDATE_MOVIE, GET_MOVIES, REMOVE_MOVIE, SAVE_MOVIES_LIST_ARR, SET_FILTERED_DATA } = types;
+const { IS_AUTHENTICATED, GET_MOVIE, ADD_MOVIE, UPDATE_MOVIE, GET_MOVIES, REMOVE_MOVIE, SAVE_MOVIES_LIST_ARR, SET_FILTERED_DATA } = types;
 
 const initialState = {
   moviesListPromise: [],
@@ -24,6 +24,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         submitted: true,
+        movie: action.payload,
+      };
+    case GET_MOVIE:
+      return {
+        ...state,
         movie: action.payload,
       };
     case GET_MOVIES:

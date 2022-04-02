@@ -6,6 +6,7 @@ const types = {
   ADD_MOVIE: 'ADD_MOVIE',
   UPDATE_MOVIE: 'UPDATE_MOVIE',
   GET_MOVIES: 'GET_MOVIES',
+  GET_MOVIE: 'GET_MOVIE',
   REMOVE_MOVIE: 'REMOVE_MOVIE',
   SAVE_MOVIES_LIST_ARR: 'SAVE_MOVIES_LIST_ARR',
   SET_FILTERED_DATA: 'SET_FILTERED_DATA',
@@ -18,6 +19,14 @@ export const addMovie = entity => {
   getMovies();
   return {
     type: types.ADD_MOVIE,
+    payload: res,
+  };
+};
+
+export const getMovie = id => {
+  const res = axios.get(`${baseUrl}/${id}.json`);
+  return {
+    type: types.GET_MOVIE,
     payload: res,
   };
 };

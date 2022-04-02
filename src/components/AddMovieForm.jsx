@@ -159,154 +159,156 @@ const FormComponent = props => {
     }
 
     return (
-        <Container>
-            <Form onSubmit={handleValidate} style={defaultStyle} >
+        // <Container>
+        //     <Form onSubmit={handleValidate} style={defaultStyle} >
 
-                <Form.Group className="mb-3" controlId="formBasicTitle" >
-                    <Form.Label>Movie Title</Form.Label>
-                    <Form.Control
-                        type="text"
-                        name="title"
-                        value={movieDetails.title}
-                        onChange={onChangeHandle}
-                        className={`${errors.errors ? 'border-danger' : ''}`}
-                        placeholder="movie name"
-                        disabled={disabledBtn}
-                    />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicMovieUrl" >
-                    <Form.Label>Movie Download Link</Form.Label>
-                    <Form.Control
-                        type="url"
-                        name="download_url"
-                        value={movieDetails.download_url}
-                        onChange={onChangeHandle}
-                        autoComplete='off'
-                        className={`${errors.errors ? 'border-danger' : ''}`}
-                        placeholder="paste movie link"
-                        disabled={disabledBtn}
-                    />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                    <Form.Label>Describe Movie</Form.Label>
-                    <Form.Control as="textarea" rows={3}
-                        placeholder="Optional"
-                        name="desc_movie"
-                        value={movieDetails.desc_movie}
-                        onChange={onChangeHandle}
-                        disabled={disabledBtn}
-                    />
-                </Form.Group>
-                <Form.Group className="mb-3">
-                    <Form.Label>Online Poster Link</Form.Label>
-                    <Form.Control
-                        type="url"
-                        name="poster_url"
-                        value={movieDetails.poster_url}
-                        onChange={onChangeHandle}
-                        autoComplete='off'
-                        placeholder="paste poster url"
-                        disabled={disabledBtn}
-                    />
-                    {/* <Form.Text className="text-muted">
-                        We"ll never share your email with anyone else.
-                    </Form.Text> */}
-                </Form.Group>
+        //         <Form.Group className="mb-3" controlId="formBasicTitle" >
+        //             <Form.Label>Movie Title</Form.Label>
+        //             <Form.Control
+        //                 type="text"
+        //                 name="title"
+        //                 value={movieDetails.title}
+        //                 onChange={onChangeHandle}
+        //                 className={`${errors.errors ? 'border-danger' : ''}`}
+        //                 placeholder="movie name"
+        //                 disabled={disabledBtn}
+        //             />
+        //         </Form.Group>
+        //         <Form.Group className="mb-3" controlId="formBasicMovieUrl" >
+        //             <Form.Label>Movie Download Link</Form.Label>
+        //             <Form.Control
+        //                 type="url"
+        //                 name="download_url"
+        //                 value={movieDetails.download_url}
+        //                 onChange={onChangeHandle}
+        //                 autoComplete='off'
+        //                 className={`${errors.errors ? 'border-danger' : ''}`}
+        //                 placeholder="paste movie link"
+        //                 disabled={disabledBtn}
+        //             />
+        //         </Form.Group>
+        //         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+        //             <Form.Label>Describe Movie</Form.Label>
+        //             <Form.Control as="textarea" rows={3}
+        //                 placeholder="Optional"
+        //                 name="desc_movie"
+        //                 value={movieDetails.desc_movie}
+        //                 onChange={onChangeHandle}
+        //                 disabled={disabledBtn}
+        //             />
+        //         </Form.Group>
+        //         <Form.Group className="mb-3">
+        //             <Form.Label>Online Poster Link</Form.Label>
+        //             <Form.Control
+        //                 type="url"
+        //                 name="poster_url"
+        //                 value={movieDetails.poster_url}
+        //                 onChange={onChangeHandle}
+        //                 autoComplete='off'
+        //                 placeholder="paste poster url"
+        //                 disabled={disabledBtn}
+        //             />
+        //             {/* <Form.Text className="text-muted">
+        //                 We"ll never share your email with anyone else.
+        //             </Form.Text> */}
+        //         </Form.Group>
 
 
 
-                <Form.Group className="mb-3" controlId="formBasicRating" >
-                    <Form.Label>Rating</Form.Label>
-                    <Form.Control
-                        name="rating"
-                        value={movieDetails.rating}
-                        onChange={onChangeHandle}
-                        max={10} min={1} step={0.1}
-                        type="number"
-                        placeholder="rate the movie as per you"
-                        disabled={disabledBtn}
-                    />
-                </Form.Group>
+        //         <Form.Group className="mb-3" controlId="formBasicRating" >
+        //             <Form.Label>Rating</Form.Label>
+        //             <Form.Control
+        //                 name="rating"
+        //                 value={movieDetails.rating}
+        //                 onChange={onChangeHandle}
+        //                 max={10} min={1} step={0.1}
+        //                 type="number"
+        //                 placeholder="rate the movie as per you"
+        //                 disabled={disabledBtn}
+        //             />
+        //         </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formBasicRating" >
-                    <Form.Label>Tags/ Category</Form.Label>
-                    <Form.Control
-                        name="tags"
-                        value={movieDetails.tags}
-                        onChange={onChangeHandle}
-                        type="text"
-                        title="separate by space"
-                        maxLength="30"
-                        placeholder="add tags here/ category"
-                        disabled={disabledBtn}
-                    />
-                </Form.Group>
-                {/* <Form.Group className="mb-3" controlId="formBasicCheckbox" >
-                    <Form.Check type="checkbox" label="Check me out" />
-                </Form.Group> */}
-                <Button variant="success" type="submit" style={{
-                    width: "100%",
-                }} disabled={disabledBtn}>
-                    {isNew ? 'Update' : 'Upload'}
-                </Button>
-            </Form>
-        </Container>
-        // <div className="container">
-        //     <div className="page">
-        //         <div className="content">
-        //             <div className="row">
-        //                 <div className="col-md-4">
-        //                     <h2 style={{color: '#fff'}}>Add Movie</h2>
-        //                     <form className="contact-form" method="post">
-        //                         <input className="name"
-        //                             type="text"
-        //                             name="title"
-        //                             value={movieDetails.title}
-        //                             onChange={onChangeHandle}
-        //                             placeholder="movie name"
-        //                             disabled={disabledBtn}
-        //                         />
-        //                         <input className="website"
-        //                             type="url"
-        //                             name="download_url"
-        //                             value={movieDetails.download_url}
-        //                             onChange={onChangeHandle}
-        //                             autoComplete='off'
-        //                             placeholder="paste movie link"
-        //                             disabled={disabledBtn}
-        //                         />
-        //                         <input className="website"
-        //                             type="url"
-        //                             name="poster_url"
-        //                             value={movieDetails.poster_url}
-        //                             onChange={onChangeHandle}
-        //                             autoComplete='off'
-        //                             placeholder="paste poster url"
-        //                             disabled={disabledBtn}
-        //                         />
-        //                         <textarea className="message"
-        //                             placeholder="Optional"
-        //                             name="desc_movie"
-        //                             value={movieDetails.desc_movie}
-        //                             onChange={onChangeHandle}
-        //                             disabled={disabledBtn}>
-        //                         </textarea>
-        //                         <input className="rating"
-        //                             name="rating"
-        //                             value={movieDetails.rating}
-        //                             onChange={onChangeHandle}
-        //                             max={10} min={1} step={0.1}
-        //                             type="number"
-        //                             placeholder="rate the movie as per you"
-        //                             disabled={disabledBtn}
-        //                         />
-        //                         <input type="submit" value="Update" style={{width: '100%', color: '#000'}} />
-        //                     </form>
-        //                 </div>
-        //             </div>
-        //         </div>
-        //     </div>
-        // </div>
+        //         <Form.Group className="mb-3" controlId="formBasicRating" >
+        //             <Form.Label>Tags/ Category</Form.Label>
+        //             <Form.Control
+        //                 name="tags"
+        //                 value={movieDetails.tags}
+        //                 onChange={onChangeHandle}
+        //                 type="text"
+        //                 title="separate by space"
+        //                 maxLength="30"
+        //                 placeholder="add tags here/ category"
+        //                 disabled={disabledBtn}
+        //             />
+        //         </Form.Group>
+        //         {/* <Form.Group className="mb-3" controlId="formBasicCheckbox" >
+        //             <Form.Check type="checkbox" label="Check me out" />
+        //         </Form.Group> */}
+        //         <Button variant="success" type="submit" style={{
+        //             width: "100%",
+        //         }} disabled={disabledBtn}>
+        //             {isNew ? 'Update' : 'Upload'}
+        //         </Button>
+        //     </Form>
+        // </Container>
+        <div className="container" style={{
+            color: disabledBtn && '#fff'
+        }}>
+            <div className="page">
+                <div className="content">
+                    <div className="row">
+                        <div className="col-md-4">
+                            <h2 style={{color: '#fff'}}>Add Movie</h2>
+                            <form className="contact-form" method="post" onSubmit={handleValidate}>
+                                <input className="name"
+                                    type="text"
+                                    name="title"
+                                    value={movieDetails.title}
+                                    onChange={onChangeHandle}
+                                    placeholder="movie name"
+                                    disabled={disabledBtn}
+                                />
+                                <input className="website"
+                                    type="url"
+                                    name="download_url"
+                                    value={movieDetails.download_url}
+                                    onChange={onChangeHandle}
+                                    autoComplete='off'
+                                    placeholder="paste movie link"
+                                    disabled={disabledBtn}
+                                />
+                                <input className="website"
+                                    type="url"
+                                    name="poster_url"
+                                    value={movieDetails.poster_url}
+                                    onChange={onChangeHandle}
+                                    autoComplete='off'
+                                    placeholder="paste poster url"
+                                    disabled={disabledBtn}
+                                />
+                                <textarea className="message"
+                                    placeholder="Optional"
+                                    name="desc_movie"
+                                    value={movieDetails.desc_movie}
+                                    onChange={onChangeHandle}
+                                    disabled={disabledBtn}>
+                                </textarea>
+                                <input className="rating"
+                                    name="rating"
+                                    value={movieDetails.rating}
+                                    onChange={onChangeHandle}
+                                    max={10} min={1} step={0.1}
+                                    type="number"
+                                    placeholder="rate the movie as per you"
+                                    disabled={disabledBtn}
+                                />
+                                <input type="submit" value="Update" style={{width: '100%', color: '#000'}} />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     )
 };
 

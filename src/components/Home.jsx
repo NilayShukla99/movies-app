@@ -26,30 +26,33 @@ const Home = () => {
   //   const [filteredMoviesListArr, setfilteredMoviesListArr] = useState(filtered_data);
   const [loading, setLoading] = useState(true);
   const [showAlert, setShowAlert] = useState(true);
-  const windowWidth = window.innerWidth || window.outerWidth;
+  const [errorMsg, setErrorMsg] = useState('');
   const apiCall = async () => {
-    const res = await dispatch(getMovies());
+    try {
+      const res = await dispatch(getMovies());
 
-    // alternative way for fetching data instead of redux store
-    const _payload = await res.payload;
-    const movies = _payload.data;
+      // alternative way for fetching data instead of redux store
+      const _payload = await res.payload;
+      const movies = _payload.data;
 
-    // moviesData from store - have some issue
-    // const moviesList = await moviesData.moviesList;
-    // const movies = await moviesList.data;
-
-    // setMovieListRaw(await moviesList.data);
-    setLoading(false);
-    await convertToArray(movies);
+      // moviesData from store - have some issue
+      // const moviesList = await moviesData.moviesList;
+      // const movies = await moviesList.data;
+      // setMovieListRaw(await moviesList.data);
+      setLoading(false);
+      setErrorMsg('');
+      await convertToArray(movies);
+    } catch (e) {
+      setErrorMsg(e.message);
+    }
   };
 
   // for stop loading and show no data availble
   if (loading) {
     setTimeout(() => {
-      console.log('123')
       setLoading(false);
-      alertMoviesCount('danger', 0, 'time out!')
-    }, 1000);
+      alertFunction('danger', 0, 'time out!')
+    }, 5000);
   }
 
   const convertToArray = data => {
@@ -65,7 +68,7 @@ const Home = () => {
     dispatch(saveMoviesListArr(arr));
     return arr;
   };
-  const alertMoviesCount = (className, num, msg) => {
+  const alertFunction = (className, num, msg) => {
     setTimeout(() => {
       setShowAlert(false);
     }, 4000);
@@ -156,7 +159,8 @@ const Home = () => {
               <>
                 {searchTerm && size(searchTerm) > 0 && <h5 style={{ color: 'grey' }}>{`${size(filteredMoviesListArr)} fetched for "${searchTerm}"`}</h5>}
                 {/* <Searchbar addBtn placeholder="Movies/ Category" title="at least two words of long movie name separated by spaces"/> */}
-                {showAlert && alertMoviesCount('success', moviesListArr.length, 'movies to enjoy!')}
+                {showAlert && alertFunction('success', moviesListArr.length, 'movies to enjoy!')}
+                {size(errorMsg) > 0 ? alertFunction('danger', '', errorMsg ) : null}
                 <div
                   style={{
                     display: 'flex',

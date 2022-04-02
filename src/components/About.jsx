@@ -3,21 +3,25 @@ import React from 'react'
 const About = () => {
     return (
         <>
-        <h3>
-            The site is for Learning Purpose
-        </h3>
-        <dl>
-            <dt>Device Type recommended</dt>
-            <dd><code>Site is designed for mainly for mobile use, for better web contact cube</code></dd>
-        </dl>
-        <dl>
-            <dt>To search Quickly for multiple words movie name</dt>
-            <dd><code>At least two words are required for that separated by space</code></dd>
-        </dl>
-        <dl>
-            <dt>Tags search</dt>
-            <dd><code>this isn't functioning yet</code></dd>
-        </dl>
+            <main class="main-content">
+                <div class="container">
+                    <div class="page">
+                        {/* <div class="breadcrumbs">
+							<a href="index.html">Home</a>
+							<span>About us</span>
+						</div> */}
+                        <h2
+                        // class="section-title"
+                        >The site is for Learning Purpose</h2>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <p class="leading">To search Quickly for multiple words movie name</p>
+                                <p>At least two words are required for that separated by space</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
         </>
     )
 }
