@@ -282,7 +282,55 @@ body {
            transition: .3s ease; }
    .button:hover, form input[type="submit"]:hover, form button:hover, form input[type="reset"]:hover, .contact-form input[type="submit"]:hover, .button:focus, form input[type="submit"]:focus, form button:focus, form input[type="reset"]:focus, .contact-form input[type="submit"]:focus {
      background-color: #ffc06f; }
- 
+     form > div{
+       display: flex;
+       justify-content: center;
+       /* background-color: #2ad4e0; */
+     }
+     form > div .typeahead {
+      width: 80%;
+      margin-top: 10px;
+     }
+ form .typeahead input {
+  width: 100%;
+  border: 1px solid #bec1c8;
+  /* background-color: transparent; */
+  background-repeat: no-repeat;
+  background-position: right center;
+  color: inherit;
+  font-size: 13px;
+  font-size: 0.8666666667em;
+  -webkit-transition: .3s ease;
+          transition: .3s ease; }
+  .slider-parent {
+    position: relative;
+  }
+  .slider-parent:hover .buble, .slider-parent:active .buble{
+    /* display: block; */
+    visibility: visible;
+    opacity: 1;
+  }
+  .buble{
+    /* display: none; */
+    visibility: hidden;
+    opacity: 0;
+    position:absolute;
+    background-color: #fff;
+    top: -25px;
+    left: 0;
+    padding: 5px;
+    width: 30px;
+    text-align: center;
+    /* 
+    height: 30px; */
+    font-weight: 600;
+    border-radius: 10px;
+    transition: all 0.2s;
+  }
+  form .typeahead input:hover, form .typeahead input:focus {
+    border-color: #ffc06f;
+    box-shadow: 0 0 0 0.25rem #ffc16f25;
+  }
  .slider {
    position: relative;
    margin-bottom: 30px; }

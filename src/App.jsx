@@ -8,11 +8,11 @@ import Footer from './components/Footer';
 import About from './components/About';
 import Login from './components/Login';
 import Movie from './components/MoviePage';
+import NotFound from './components/404NotFound';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import 'react-bootstrap-typeahead/css/Typeahead.css';
 
-import db from '../src/firebaseConfig';
-// const database = db.ref('');
 
 // const url = window.location.href;
 // const i = url.lastIndexOf('/');
@@ -40,6 +40,7 @@ const RoutesComp = () => {
       {confirmAuth && <Route path="/add-movie" exact element={<Form />} />}
       {confirmAuth && <Route path="/about" exact element={<About />} />}
       {confirmAuth && <Route path="/movie/:id" exact element={<Movie />} />}
+      <Route path='*' element={<NotFound />} />
     </Routes>
   );
 };

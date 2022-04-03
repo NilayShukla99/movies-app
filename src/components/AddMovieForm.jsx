@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addMovie, updateMovie, getMovies } from "../redux/actions/index";
+import { Typeahead } from "react-bootstrap-typeahead";
 
 const FormComponent = props => {
 
@@ -17,7 +18,7 @@ const FormComponent = props => {
         title: "",
         poster_url: "",
         desc_movie: "",
-        rating: 1,
+        rating: 5,
         download_url: "",
         tags: ''
     });
@@ -52,17 +53,32 @@ const FormComponent = props => {
         }
     }, []);
 
+    // for range slider bubble
+    useEffect(() => {
+        const ele = document.querySelector('.buble');
+        if (ele) {
+            ele.style.left = `${Number(movieDetails.rating * 45)}px`;
+        }
+    }, [movieDetails.rating])
     // functions
     const onChangeHandle = e => {
-        const name = e.target.name;
-        let value = e.target.value;
-        if (name === 'title' || name === 'tags') {
-            value = value.replace(/ +/g, ' ');
+        console.log(typeof e, e);
+        if (e.hasOwnProperty('target')) {
+            const name = e.target.name;
+            let value = e.target.value;
+            if (name === 'title' || name === 'tags') {
+                value = value.replace(/ +/g, ' ');
+            }
+            setMovieDetails({
+                ...movieDetails,
+                [name]: value
+            })
+        } else {
+            setMovieDetails({
+                ...movieDetails,
+                tags: e
+            })
         }
-        setMovieDetails({
-            ...movieDetails,
-            [name]: value
-        })
     };
     const handleValidate = e => {
         e.preventDefault();
@@ -95,7 +111,7 @@ const FormComponent = props => {
                     poster: movieDetails.poster_url,
                     downloadLink: movieDetails.download_url,
                     rating: movieDetails.rating,
-                    tags: movieDetails.tags.split(' '),
+                    tags: typeof movieDetails.tags === 'string' ? movieDetails.tags.split(' ') : movieDetails.tags,
                     addDate: new Date().toLocaleDateString(),
                 };
                 res = await dispatch(addMovie(entity));
@@ -157,7 +173,6 @@ const FormComponent = props => {
             }
         }
     }
-
     return (
         // <Container>
         //     <Form onSubmit={handleValidate} style={defaultStyle} >
@@ -293,15 +308,43 @@ const FormComponent = props => {
                                     onChange={onChangeHandle}
                                     disabled={disabledBtn}>
                                 </textarea>
-                                <input className="rating"
-                                    name="rating"
-                                    value={movieDetails.rating}
-                                    onChange={onChangeHandle}
-                                    max={10} min={1} step={0.1}
-                                    type="number"
-                                    placeholder="rate the movie as per you"
-                                    disabled={disabledBtn}
-                                />
+                                
+                                    {/* <input className="rating"
+                                        name="rating"
+                                        id='rating'
+                                        value={movieDetails.rating}
+                                        onChange={onChangeHandle}
+                                        max={10} min={1} step={0.1}
+                                        type="range"
+                                        disabled={disabledBtn}
+                                    /> */}
+                                    <Typeahead
+                                        id="typeaheadForTags"
+                                        name='tags'
+                                        placeholder="add tags.."
+                                        options={['qwe', 'qwe', 'wer', 'ert', 'rty']}
+                                        allowNew
+                                        multiple
+                                        onChange={onChangeHandle}
+                                    />
+                                <label style={{color: '#fff'}} htmlFor='rating'>Rate the movie . . . </label>
+                                <div className="slider-parent ratings">
+                                    <input
+                                        id='rating'
+                                        name="rating" className="rating"
+                                        type="range"
+                                        value={movieDetails.rating}
+                                        max={10} min={1} step={0.1}
+                                        onChange={onChangeHandle}
+                                            // e => {
+                                            // ({target: {value}})
+                                            // console.log(e.target.value)}
+                                        disabled={disabledBtn}
+                                    />
+                                    <div className="buble">
+                                        {movieDetails.rating}
+                                    </div>
+                                </div>
                                 <input type="submit" value="Update" style={{width: '100%', color: '#000'}} />
                             </form>
                         </div>

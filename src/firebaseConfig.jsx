@@ -16,5 +16,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 // Get a reference to the database service
 const database = getDatabase(app);
+// DataSnapshot, Database, OnDisconnect, QueryConstraint, TransactionResult, _QueryImpl, _QueryParams, _ReferenceImpl, _TEST_ACCESS_forceRestClient, _TEST_ACCESS_hijackHash, _repoManagerDatabaseFromApp, _setSDKVersion, _validatePathString, _validateWritablePath, child, connectDatabaseEmulator, enableLogging, endAt, endBefore, equalTo, get, getDatabase, goOffline, goOnline, increment, limitToFirst, limitToLast, off, onChildAdded, onChildChanged, onChildMoved, onChildRemoved, onDisconnect, onValue, orderByChild, orderByKey, orderByPriority, orderByValue, push, query, ref, refFromURL, remove, runTransaction, serverTimestamp, set, setPriority, setWithPriority, startAfter, startAt, update
 
 export default database;

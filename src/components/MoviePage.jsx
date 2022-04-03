@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getMovie } from '../redux/actions/index';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { TagsComp } from './generic_comps/SubCompForCard';
-import { get } from 'lodash';
+import { get, isEmpty } from 'lodash';
 import { Link } from 'react-router-dom';
 
 const Movie = props => {
@@ -58,22 +58,21 @@ const Movie = props => {
         setMovie(get(payload, 'data', {}));
     }, []);
 
-    // const movieData = movie ? movie : _movie;
     const movieData = {
-        addDate: "3/13/2022",
-        desc_movie: "Human invasion on Alien planet",
-        id: 7112,
-        name: 'Avatar',
-        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvxLXoNC4BYVXl77-9RZXbNlOu2_4bcPLcDA&usqp=CAU",
-        rating: '8',
-        tags: ['scifi', 'space', 'alien'],
-        downloadLink: '"https://drive.google.com/file/d/1EpqawNGWC_f7RUSzt0zjNippiLWShFQ-/view?usp=drivesdk"'
+        addDate: get(movie, 'addDate', ''),
+        desc_movie: get(movie, 'desc_movie', ''),
+        id: get(movie, 'id', ''),
+        name: get(movie, 'name', ''),
+        poster: get(movie, 'poster', ''),
+        rating: get(movie, 'rating', ''),
+        tags: get(movie, 'tags', []),
+        downloadLink: get(movie, 'downloadLink', '')
     }
     return (
         <main className="main-content">
             <div className="container">
-                <div className="page">
-            <Link to='/home' style={style.linkToBtn}>&#10229; Back</Link> {/* &#10229; back arrow html code*/}
+                {!isEmpty(movieData) && <div className="page">
+                    <Link to='/home' style={style.linkToBtn}>&#10229; Back</Link> {/* &#10229; back arrow html code*/}
                     {/* <div className="breadcrumbs">
                         <a href="index.html">Home</a>
                         <a href="review.html">Movie Review</a>
@@ -106,12 +105,12 @@ const Movie = props => {
                                         <TagsComp value={movieData.tags} />
                                     </li>
                                 </ul>
-                                    <a href={`${movieData.downloadLink}`} style={style.linkBtn}>Download</a>
+                                <a href={`${movieData.downloadLink}`} style={style.linkBtn}>Download</a>
                                 {console.log(window.innerWidth)}
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>}
             </div>
         </main>
     )
