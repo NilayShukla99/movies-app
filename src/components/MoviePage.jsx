@@ -43,6 +43,10 @@ const Movie = props => {
             color: '#484848',
             textDecoration: 'underline #ffaa3c 2px',
             fontWeight: '600'
+        },
+        right: {
+            float : 'right',
+            color: 'lightgrey'
         }
     });
 
@@ -86,6 +90,7 @@ const Movie = props => {
                             </div>
                             <div className="col-md-6" data-key={movieData.id}>
                                 <h2 className="movie-title">{movieData.name}</h2>
+                                <span style={style.right}>{movieData.addDate}</span>
                                 <div className="movie-summary">
                                     <p>{movieData.desc_movie}</p>
                                 </div>
@@ -98,7 +103,6 @@ const Movie = props => {
                                         </div> */}
                                         <span style={style.movieMeta}>Rating:</span> {movieData.rating} out of 10
                                     </li>
-                                    <li><span style={style.movieMeta}>Name:</span> {movieData.name}</li>
                                     <li><span style={style.movieMeta}>Added/ Updated:</span> {movieData.addDate}</li>
                                     <li><span style={style.movieMeta}>Category:</span> Add karenge tab k tab dekh lenge</li>
                                     <li><span style={style.movieMeta}>Tags:</span>
