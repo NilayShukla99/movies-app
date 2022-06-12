@@ -5,29 +5,29 @@ import { useSelector, useDispatch } from 'react-redux';
 import { checkAuth } from '../redux/actions';
 import { useNavigate, useLocation, useHref, useRoutes } from 'react-router-dom';
 import logo from '../images/logo.png';
+import netlifyIdentity from 'netlify-identity-widget';
 
 // + style={({ isActive }) => ({ color: isActive ? 'green' : 'blue' })}
 
 const NavbarComponent = props => {
   // const auth = useSelector(store => store._movie.authenticated);
-  const [show , setShow] = useState(props.showSearch);
-  let auth = sessionStorage.getItem('isLoggedIn');
-  auth = auth && auth.includes('true') ? true : false;
+  const [show , setShow] = useState(props.showSearch);  
+  let store = useSelector(store => store._movie);
+  const user = store.user ? store.user : window.localStorage.getItem('gotrue.user');
+  let auth = store.authenticated || Boolean(user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const title = auth ? 'Logout' : 'Login';
   const handleAuth = () => {
-    // isLoggedIn
-    const token = auth;
     
     // auth && dispatch(checkAuth(false));
     if (auth && title === 'Logout') {
       // <Navigate to='/' replace/>
       
       navigate('/', { replace: true });
-      sessionStorage.setItem('isLoggedIn', false);
       dispatch(checkAuth(false));
+      netlifyIdentity.logout()
       // window.location.reload();
     }
   }
@@ -40,78 +40,6 @@ const NavbarComponent = props => {
       setShow(false);
     }
   }, [path]);
-  // return (
-  //   <>
-  //     {auth && <Navbar bg="light" expand="lg">
-  //       <Container fluid>
-  //         <Navbar.Brand as={Link} to="/home">
-  //           {/* <Navbar.Brand as={Link} to="/"> */}
-  //           Movies App
-  //         </Navbar.Brand>
-  //         {/* <Button as={Link} to='/add-movie' variant='success'>Add</Button> */}
-  //         <Navbar.Toggle aria-controls="navbarScroll" />
-  //         <Navbar.Collapse id="navbarScroll">
-  //           <Nav className="me-auto my-2 my-lg-0" style={{ maxHeight: '100px' }} navbarScroll>
-  //             <Nav.Link
-  //               as={NavLink}
-  //               to="/home"
-  //               style={({ isActive }) => ({
-  //                 textDecoration: isActive ? 'dashed underline #3e6efd' : 'none',
-  //                 color: isActive ? '#3e6efd' : '#0000008c',
-  //                 textDecorationThickness: isActive ? '3px' : 'unset',
-  //                 fontWeight: isActive ? '650' : 'unset',
-  //                 paddingBottom: isActive ? '7px' : '',
-  //               })}
-  //             >
-  //               Home
-  //             </Nav.Link>
-  //             <Nav.Link
-  //               as={NavLink}
-  //               to="/add-movie"
-  //               style={({ isActive }) => ({
-  //                 textDecoration: isActive ? 'dashed underline #3e6efd' : 'none',
-  //                 color: isActive ? '#3e6efd' : '#0000008c',
-  //                 textDecorationThickness: isActive ? '3px' : 'unset',
-  //                 fontWeight: isActive ? '650' : 'unset',
-  //                 paddingBottom: isActive ? '7px' : '',
-  //               })}
-  //             >
-  //               Add Movie
-  //             </Nav.Link>
-  //             <Nav.Link
-  //               as={NavLink}
-  //               to="/about"
-  //               style={({ isActive }) => ({
-  //                 textDecoration: isActive ? 'dashed underline #3e6efd' : 'none',
-  //                 color: isActive ? '#3e6efd' : '#0000008c',
-  //                 textDecorationThickness: isActive ? '3px' : 'unset',
-  //                 fontWeight: isActive ? '650' : 'unset',
-  //                 paddingBottom: isActive ? '7px' : '',
-  //               })}
-  //             >
-  //               About
-  //             </Nav.Link>
-  //             <Nav.Link
-  //               // as={Link} to="/"
-  //               onClick={handleAuth}
-  //             >
-  //               {title}
-  //             </Nav.Link>
-  //             {/* <NavDropdown title={title} id="navbarScrollingDropdown">
-  //               <NavDropdown.Item as={Link} to="/" onClick={handleAuth}>
-  //                 {' '}
-  //                 {auth ? 'LogOut' : 'Login'}{' '}
-  //               </NavDropdown.Item>
-  //             </NavDropdown> */}
-  //           </Nav>
-  //           <div className="d-flex">
-  //             <Searchbar searchBtn placeholder="Search... movie name" />
-  //           </div>
-  //         </Navbar.Collapse>
-  //       </Container>
-  //     </Navbar>}
-  //   </>
-  // );
 
   // change location
   const navigateTo = loc => {
@@ -138,8 +66,6 @@ const NavbarComponent = props => {
     }
   }
 
-
-
   return (
     <header className="site-header">
     <div className="container">
@@ -152,13 +78,13 @@ const NavbarComponent = props => {
       </Link>
 
         {
-          auth && <div className="main-navigation">
+          user && <div className="main-navigation">
             <button type="button" className="menu-toggle" onClick={diplayMenu}><i className="fa fa-bars"></i></button>
             <ul className="menu">
               <li className="menu-item"><NavLink style={({ isActive }) => (activeStyle(isActive))} to="/home">Home</NavLink></li>
               <li className="menu-item"><NavLink style={({ isActive }) => (activeStyle(isActive))} to="/add-movie">Add Movie</NavLink></li>
               <li className="menu-item"><NavLink style={({ isActive }) => (activeStyle(isActive))} to="/about">About</NavLink></li>
-              <li className="menu-item"><a onClick={handleAuth}>{title}</a></li>
+              <li className="menu-item"><a style={{cursor: 'pointer'}} onClick={handleAuth}>{title}</a></li>
             </ul>
 
             <div className="search-form">

@@ -55,6 +55,19 @@ const Movie = props => {
     //     console.log(params);
     //     console.log(location);
     // }
+
+    // for responsive
+    // useEffect(() => {
+    //     window.addEventListener('resize', () => {
+    //         if (window.innerWidth > 758) {
+    //             setBg('pink')
+    //         } else {
+    //             setBg('grey')
+    //         }
+    //     });
+
+    //     return window.removeEventListener('resize', () => console.log('removed'));
+    // });
     useEffect(async () => {
         const { id } = params;
         const res = await getMovie(id);
@@ -110,7 +123,6 @@ const Movie = props => {
                                     </li>
                                 </ul>
                                 <a href={`${movieData.downloadLink}`} style={style.linkBtn}>Download</a>
-                                {console.log(window.innerWidth)}
                             </div>
                         </div>
                     </div>

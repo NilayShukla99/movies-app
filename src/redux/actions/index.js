@@ -10,7 +10,8 @@ const types = {
   REMOVE_MOVIE: 'REMOVE_MOVIE',
   SAVE_MOVIES_LIST_ARR: 'SAVE_MOVIES_LIST_ARR',
   SET_FILTERED_DATA: 'SET_FILTERED_DATA',
-  IS_AUTHENTICATED: 'IS_AUTHENTICATED'
+  IS_AUTHENTICATED: 'IS_AUTHENTICATED',
+  IS_USER: 'IS_USER'
 };
 
 export const addMovie = entity => {
@@ -78,5 +79,12 @@ export const checkAuth = authData => {
     payload: authData
   };
 };
+
+export const setUser = user => {
+  return {
+    type: types.IS_USER,
+    payload: user
+  }
+}
 
 export default types;

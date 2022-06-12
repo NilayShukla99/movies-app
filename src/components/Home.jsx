@@ -29,11 +29,12 @@ const Home = () => {
   const [errorMsg, setErrorMsg] = useState('');
   const apiCall = async () => {
     try {
-      const res = await dispatch(getMovies());
-
+      const res = getMovies();
+      // const movies = await get(res, 'payload');
+      
       // alternative way for fetching data instead of redux store
-      const _payload = await res.payload;
-      const movies = _payload.data;
+      const _payload = await get(res, 'payload');
+      const movies = get(_payload, 'data');
 
       // moviesData from store - have some issue
       // const moviesList = await moviesData.moviesList;
@@ -41,7 +42,7 @@ const Home = () => {
       // setMovieListRaw(await moviesList.data);
       setLoading(false);
       setErrorMsg('');
-      await convertToArray(movies);
+      convertToArray(movies);
     } catch (e) {
       setErrorMsg(e.message);
     }
@@ -83,67 +84,6 @@ const Home = () => {
     setMovieListArr(tempArr);
   }, [tempArr]);
 
-  // return (
-  //   <>
-  //     {loading ? (
-  //       <Loader />
-  //     ) : (
-  //       <>
-  //         <Searchbar addBtn placeholder="Movies/ Category" title="at least two words of long movie name separated by spaces"/>
-  //         {showAlert && alertMoviesCount()}
-  //         <div
-  //           style={{
-  //             display: 'flex',
-  //             flexWrap: 'wrap',
-  //             justifyContent: 'center',
-  //           }}
-  //         >
-  //           {searchTerm && size(searchTerm) > 0 ? (
-  //             filteredMoviesListArr.length > 0 ? (
-  //               filteredMoviesListArr.map((itm, i) => {
-  //                 return (
-  //                   <Card
-  //                     key={i}
-  //                     downloadLink={itm.downloadLink}
-  //                     poster={itm.poster}
-  //                     name={itm.name}
-  //                     rating={itm.rating}
-  //                     addDate={itm.addDate}
-  //                     id={itm.id}
-  //                     firebaseID={itm.firebaseID}
-  //                     tags={itm.tags}
-  //                     desc_movie={itm.desc_movie}
-  //                   />
-  //                 );
-  //               })
-  //             ) : (
-  //               <h3>No data available</h3>
-  //             )
-  //           ) : moviesListArr.length > 0 ? (
-  //             moviesListArr.map((itm, i) => {
-  //               return (
-  //                 <Card
-  //                   key={i}
-  //                   downloadLink={itm.downloadLink}
-  //                   poster={itm.poster}
-  //                   name={itm.name}
-  //                   rating={itm.rating}
-  //                   addDate={itm.addDate}
-  //                   id={itm.id}
-  //                   firebaseID={itm.firebaseID}
-  //                   tags={itm.tags}
-  //                   desc_movie={itm.desc_movie}
-  //                 />
-  //               );
-  //             })
-  //           ) : (
-  //             <h3>No data available</h3>
-  //           )}
-  //         </div>
-  //       </>
-  //     )}
-  //   </>
-  // );
   return (
     <main className="main-content">
       <div className="container">

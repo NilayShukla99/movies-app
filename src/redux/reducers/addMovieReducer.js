@@ -1,6 +1,6 @@
 import types from '../actions/index';
 
-const { IS_AUTHENTICATED, GET_MOVIE, ADD_MOVIE, UPDATE_MOVIE, GET_MOVIES, REMOVE_MOVIE, SAVE_MOVIES_LIST_ARR, SET_FILTERED_DATA } = types;
+const { IS_AUTHENTICATED, GET_MOVIE, ADD_MOVIE, UPDATE_MOVIE, GET_MOVIES, REMOVE_MOVIE, SAVE_MOVIES_LIST_ARR, SET_FILTERED_DATA, IS_USER } = types;
 
 const initialState = {
   moviesListPromise: [],
@@ -9,7 +9,8 @@ const initialState = {
   searchTerm: '',
   movie: null,
   submitted: false,
-  authenticated: false
+  authenticated: false,
+  user: null
 };
 
 export default (state = initialState, action) => {
@@ -57,7 +58,12 @@ export default (state = initialState, action) => {
         return {
           ...state,
           authenticated: action.payload
-        }
+        };
+      case IS_USER:
+        return {
+          ...state,
+          user: action.payload
+        };
 
     default:
       return initialState;

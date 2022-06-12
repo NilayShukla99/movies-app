@@ -9,15 +9,17 @@ import { BrowserRouter } from 'react-router-dom';
 
 // react-redux
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import rootReducer from './redux/reducers';
+import logger from './redux/logger'
 
 // components
 import App from './App';
 
 // store - can create a separate file for this then export default
 const store = createStore(
-  rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+  applyMiddleware(logger)
 );
 
 ReactDOM.render(
