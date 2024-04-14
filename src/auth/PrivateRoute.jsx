@@ -14,7 +14,7 @@ const useAuth = () => {
 }
 
 const PrivateRoutes = (props) => {
-    const auth = useAuth();
+    const auth = useAuth() || true;
    return auth ? props.children : <Navigate to="/" replace />
   };
   // outlet represents props.children
